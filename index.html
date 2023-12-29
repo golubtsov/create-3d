@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3D</title>
+    <link rel="stylesheet" href="./css/output.css" />
+    <script src="./p5/p5.js"></script>
+  </head>
+
+  <body>
+    <main id="main-canvas"></main>
+
+    <!-- ========== МОДАЛЬНОЕ ОКНО ДЛЯ ОСЕЙ ============== -->
+    <div class="modal-window left-5 top-5">
+      <div>
+        <label
+          for="rotate-x"
+          class="block text-sm font-medium text-gray-900 dark:text-white"
+          >Ось X</label
+        >
+        <input
+          id="rotate-x"
+          name="rotate-x"
+          type="range"
+          value="20"
+          max="90"
+          min="0"
+          step="1"
+          class="cursor-point"
+        />
+      </div>
+
+      <div>
+        <label
+          for="rotate-z"
+          class="block text-sm font-medium text-gray-900 dark:text-white"
+          >Ось Z</label
+        >
+        <input
+          id="rotate-z"
+          name="rotate-z"
+          type="range"
+          value="0"
+          max="180"
+          min="-180"
+          step="1"
+          class="cursor-point"
+        />
+      </div>
+    </div>
+    <!-- ================================================ -->
+
+    <!-- ========== МОДАЛЬНОЕ ОКНО ДЛЯ ГЕОМЕТРИЧЕСКИХ ОБЪЕКТОВ ============== -->
+    <div class="modal-window w-[150px] top-5 right-5">
+      <div>
+        <h1 class="text-center">Объекты</h1>
+      </div>
+      <div class="mt-2 flex flex-col gap-2 content-center items-center">
+        <div
+          id="box-example-canvas"
+          class="cursor-pointer m-auto content-center"
+        ></div>
+        <div
+          id="cone-example-canvas"
+          class="cursor-pointer m-auto content-center"
+        ></div>
+        <div
+          id="cylinder-example-canvas"
+          class="cursor-pointer m-auto content-center"
+        ></div>
+        <div
+          id="ellipsoid-example-canvas"
+          class="cursor-pointer m-auto content-center"
+        ></div>
+        <div
+          id="sphere-example-canvas"
+          class="cursor-pointer m-auto content-center"
+        ></div>
+      </div>
+    </div>
+    <!-- ===================================================================== -->
+
+    <!-- ========== МОДАЛЬНОЕ ОКНО ДЛЯ НОВОГО КУБА ============== -->
+    <div id="window-create-box" class="hidden window-new-obj">
+      <div class="modal-window w-200 top-5 right-48">
+        <div class="w-full">
+          <h1 class="text-center">Куб</h1>
+        </div>
+        <div class="w-full flex flex-col gap-y-3">
+          <div>
+            <label for="box-width" class="label-item">Ширина</label>
+            <input type="text" id="box-width" class="input-item" />
+          </div>
+
+          <div>
+            <label for="box-height" class="label-item">Высота</label>
+            <input type="text" id="box-height" class="input-item" />
+          </div>
+
+          <div>
+            <label for="box-color" class="label-item">Цвет</label>
+            <div class="flex">
+              <input
+                value="200"
+                type="number"
+                id="red-color-box"
+                class="input-item"
+              />
+              <input
+                value="30"
+                type="number"
+                id="green-color-box"
+                class="input-item"
+              />
+              <input
+                value="198"
+                type="number"
+                id="blue-color-box"
+                class="input-item"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="box-depth" class="label-item">Выдавить</label>
+            <input type="text" id="box-depth" class="input-item" />
+          </div>
+
+          <div class="m-auto">
+            <button id="btn-create-box" type="submit" class="btn-save">
+              Создать
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ======================================================== -->
+
+    <!-- ========== МОДАЛЬНОЕ ОКНО ДЛЯ НОВОГО КОНУСА ============== -->
+    <div id="window-create-cone" class="hidden window-new-obj">
+      <div class="modal-window w-200 top-5 right-48">
+        <div class="w-full">
+          <h1 class="text-center">Конус</h1>
+        </div>
+        <div class="w-full flex flex-col gap-y-3">
+          <div>
+            <label for="cone-radius" class="label-item">Радиус</label>
+            <input type="text" id="cone-radius" class="input-item" />
+          </div>
+
+          <div>
+            <label for="cone-height" class="label-item">Высота</label>
+            <input type="text" id="cone-height" class="input-item" />
+          </div>
+
+          <div>
+            <label for="cone-color" class="label-item">Цвет</label>
+            <div class="flex">
+              <input
+                value="20"
+                type="number"
+                id="red-color-cone"
+                class="input-item"
+              />
+              <input
+                value="230"
+                type="number"
+                id="green-color-cone"
+                class="input-item"
+              />
+              <input
+                value="198"
+                type="number"
+                id="blue-color-cone"
+                class="input-item"
+              />
+            </div>
+          </div>
+
+          <div class="m-auto">
+            <button id="btn-create-cone" type="submit" class="btn-save">
+              Создать
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ======================================================== -->
+
+    <!-- ========== МОДАЛЬНОЕ ОКНО ДЛЯ НОВОГО ЦИЛИНДРА ============== -->
+    <div id="window-create-cylinder" class="hidden window-new-obj">
+      <div class="modal-window w-200 top-5 right-48">
+        <div class="w-full">
+          <h1 class="text-center">Цилиндр</h1>
+        </div>
+        <div class="w-full flex flex-col gap-y-3">
+          <div>
+            <label for="cylinder-radius" class="label-item">Радиус</label>
+            <input type="text" id="cylinder-radius" class="input-item" />
+          </div>
+
+          <div>
+            <label for="cylinder-height" class="label-item">Высота</label>
+            <input type="text" id="cylinder-height" class="input-item" />
+          </div>
+
+          <div>
+            <label for="cylinder-color" class="label-item">Цвет</label>
+            <div class="flex">
+              <input
+                value="20"
+                type="number"
+                id="red-color-cylinder"
+                class="input-item"
+              />
+              <input
+                value="230"
+                type="number"
+                id="green-color-cylinder"
+                class="input-item"
+              />
+              <input
+                value="198"
+                type="number"
+                id="blue-color-cylinder"
+                class="input-item"
+              />
+            </div>
+          </div>
+
+          <div class="m-auto">
+            <button id="btn-create-cylinder" type="submit" class="btn-save">
+              Создать
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================ -->
+
+    <!-- ========== МОДАЛЬНОЕ ОКНО ДЛЯ НОВОГО ЭЛЛИПСА ============== -->
+    <div id="window-create-ellipsoid" class="hidden window-new-obj">
+      <div class="modal-window w-200 top-5 right-48">
+        <div class="w-full">
+          <h1 class="text-center">Эллипс</h1>
+        </div>
+        <div class="w-full flex flex-col gap-y-3">
+          <div>
+            <label for="ellipsoid-radius-x" class="label-item">Радиус X</label>
+            <input type="text" id="ellipsoid-radius-x" class="input-item" />
+          </div>
+
+          <div>
+            <label for="уllipsoid-radius-y" class="label-item">Радиус Y</label>
+            <input type="text" id="ellipsoid-radius-y" class="input-item" />
+          </div>
+
+          <div>
+            <label for="ellipsoid-radius-z" class="label-item">Радиус Z</label>
+            <input type="text" id="ellipsoid-radius-z" class="input-item" />
+          </div>
+
+          <div>
+            <label for="ellipsoid-color" class="label-item">Цвет</label>
+            <div class="flex">
+              <input
+                value="20"
+                type="number"
+                id="red-color-ellipsoid"
+                class="input-item"
+              />
+              <input
+                value="230"
+                type="number"
+                id="green-color-ellipsoid"
+                class="input-item"
+              />
+              <input
+                value="198"
+                type="number"
+                id="blue-color-ellipsoid"
+                class="input-item"
+              />
+            </div>
+          </div>
+
+          <div class="m-auto">
+            <button id="btn-create-ellipsoid" type="submit" class="btn-save">
+              Создать
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- =========================================================== -->
+
+    <!-- ========== МОДАЛЬНОЕ ОКНО ДЛЯ НОВОЙ СФЕРЫ ============== -->
+    <div id="window-create-sphere" class="hidden window-new-obj">
+      <div class="modal-window w-200 top-5 right-48">
+        <div class="w-full">
+          <h1 class="text-center">Эллипс</h1>
+        </div>
+        <div class="w-full flex flex-col gap-y-3">
+          <div>
+            <label for="sphere-radius" class="label-item">Радиус</label>
+            <input type="text" id="sphere-radius" class="input-item" />
+          </div>
+
+          <div>
+            <label for="sphere-color" class="label-item">Цвет</label>
+            <div class="flex">
+              <input
+                value="20"
+                type="number"
+                id="red-color-sphere"
+                class="input-item"
+              />
+              <input
+                value="20"
+                type="number"
+                id="green-color-sphere"
+                class="input-item"
+              />
+              <input
+                value="208"
+                type="number"
+                id="blue-color-sphere"
+                class="input-item"
+              />
+            </div>
+          </div>
+
+          <div class="m-auto">
+            <button id="btn-create-sphere" type="submit" class="btn-save">
+              Создать
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ======================================================== -->
+
+    <!-- ========== СПИСОК ЭЛЕМЕНТОВ ============== -->
+    <div class="modal-window left-5 top-48 content-center">
+      <div>
+        <h1 class="text-center border-b-2 border-gray-500">Элементы</h1>
+      </div>
+      <div id="list-elems" class="flex flex-col gap-2"></div>
+    </div>
+    <!-- ========================================== -->
+
+    <div class="modal-window left-64 top-5 content-center">
+      <div>
+        <h1>Состояние</h1>
+      </div>
+      <div id="list-state" class="flex flex-col gap-2 mt-2">
+        <div>
+          <label for="coordinate-x" class="label-item">Координата X</label>
+          <input type="number" id="coordinate-x" class="input-item" />
+        </div>
+
+        <div>
+          <label for="coordinate-y" class="label-item">Координата Y</label>
+          <input type="number" id="coordinate-y" class="input-item" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= ООП ========================== -->
+    <script src="./js/objects/GeometricObjects.js"></script>
+    <script src="./js/objects/ConeClass.js"></script>
+    <script src="./js/objects/CylinderClass.js"></script>
+    <script src="./js/objects/SphereClass.js"></script>
+    <script src="./js/objects/BoxClass.js"></script>
+    <script src="./js/objects/EllipsoidClass.js"></script>
+    <!-- ================================================= -->
+
+    <!-- =========== НАСТРОЙКИ ПРИЛОЖЕНИЯ ============================ -->
+    <script src="./js/settings/settings-app.js"></script>
+    <script src="./js/settings/rotate-block.js"></script>
+    <!-- ============================================================= -->
+
+    <!-- ================= ГЕОМЕТРИЧЕСКИЕ ОБЪЕКТЫ JS ========================== -->
+    <script src="./js/small-canvas/boxExampleCanvas.js"></script>
+    <script src="./js/small-canvas/coneExampleCanvas.js"></script>
+    <script src="./js/small-canvas/cylinderExampleCanvas.js"></script>
+    <script src="./js/small-canvas/ellipsoidExampleCanvas.js"></script>
+    <script src="./js/small-canvas/sphereExampleCanvas.js"></script>
+    <!-- =================================================================== -->
+
+    <!-- =========== ДОБАВЛЕНИЕ НОВЫХ ЭЛЕМЕНТОВ ============================ -->
+    <script src="./js/new-elem/add-new-box.js"></script>
+    <script src="./js/new-elem/add-new-cone.js"></script>
+    <script src="./js/new-elem/add-new-cylinder.js"></script>
+    <script src="./js/new-elem/add-new-ellipsoid.js"></script>
+    <script src="./js/new-elem/add-new-sphere.js"></script>
+    <!-- ================================================================= -->
+
+    <!-- =========== ГЛАВНЫЙ CANVAS ============================ -->
+    <script src="./js/mainCanvasSketch.js"></script>
+
+    <script src="./js/geometric-elems/list-elems.js"></script>
+  </body>
+</html>
