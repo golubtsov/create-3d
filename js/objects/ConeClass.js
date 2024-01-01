@@ -10,11 +10,6 @@ class ConeClass extends GeometricObjects {
     this.setTypeObj("cone");
   }
 
-  setPosition(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-
   show(sketch) {
     sketch.push();
     sketch.translate(this.x, this.y, this.z);

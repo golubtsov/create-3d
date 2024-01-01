@@ -15,8 +15,6 @@ function settingsForWorld(sketch) {
 function closeAllWindowsForCreateObj() {
   const windowsCreateObj = document.querySelectorAll(".window-new-obj");
   windowsCreateObj.forEach((window) => {
-    if (!window.classList.contains("hidden")) {
-      window.classList.add("hidden");
-    }
+    window.classList.add("hidden");
   });
 }

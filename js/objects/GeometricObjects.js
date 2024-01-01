@@ -21,10 +21,10 @@ class GeometricObjects {
     this.blue = blue;
   }
 
-  setPosition(x, y) {
+  setPosition(x, y, z) {
     this.x = x;
     this.y = y;
-    this.z = 0;
+    this.z = z;
   }
 
   show(sketch) {}

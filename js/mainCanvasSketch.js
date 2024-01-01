@@ -5,16 +5,6 @@ const START_CAM_RANGE = 800;
 let camMainCanvas;
 let camRangeMainCanvas = START_CAM_RANGE;
 
-// let testBox = new BoxClass(100, 100, 100);
-// testBox.setPosition(-100, -100);
-// testBox.setColor(205, 20, 20);
-// elems.push(testBox);
-
-// let testC = new CylinderClass(50, 100);
-// testC.setPosition(200, -100);
-// testC.setColor(205, 205, 20);
-// elems.push(testC);
-
 let mainCanvasSketch = (sketch) => {
   sketch.setup = () => {
     sketch.angleMode(sketch.DEGREES);

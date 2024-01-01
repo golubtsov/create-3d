@@ -16,7 +16,7 @@
       <div>
         <label
           for="rotate-x"
-          class="block text-sm font-medium text-gray-900 dark:text-white"
+          class="block text-sm font-medium text-gray-900"
           >Ось X</label
         >
         <input
@@ -34,7 +34,7 @@
       <div>
         <label
           for="rotate-z"
-          class="block text-sm font-medium text-gray-900 dark:text-white"
+          class="block text-sm font-medium text-gray-900"
           >Ось Z</label
         >
         <input
@@ -94,12 +94,12 @@
           </div>
 
           <div>
-            <label for="box-height" class="label-item">Высота</label>
+            <label for="box-height" class="label-item">Длина</label>
             <input type="text" id="box-height" class="input-item" />
           </div>
 
           <div>
-            <label for="box-color" class="label-item">Цвет</label>
+            <label for="box-color" class="label-item">Цвет RGB</label>
             <div class="flex">
               <input
                 value="200"
@@ -123,7 +123,7 @@
           </div>
 
           <div>
-            <label for="box-depth" class="label-item">Выдавить</label>
+            <label for="box-depth" class="label-item">Высота</label>
             <input type="text" id="box-depth" class="input-item" />
           </div>
 
@@ -155,7 +155,7 @@
           </div>
 
           <div>
-            <label for="cone-color" class="label-item">Цвет</label>
+            <label for="cone-color" class="label-item">Цвет RGB</label>
             <div class="flex">
               <input
                 value="20"
@@ -206,7 +206,7 @@
           </div>
 
           <div>
-            <label for="cylinder-color" class="label-item">Цвет</label>
+            <label for="cylinder-color" class="label-item">Цвет RGB</label>
             <div class="flex">
               <input
                 value="20"
@@ -262,7 +262,7 @@
           </div>
 
           <div>
-            <label for="ellipsoid-color" class="label-item">Цвет</label>
+            <label for="ellipsoid-color" class="label-item">Цвет RGB</label>
             <div class="flex">
               <input
                 value="20"
@@ -308,7 +308,7 @@
           </div>
 
           <div>
-            <label for="sphere-color" class="label-item">Цвет</label>
+            <label for="sphere-color" class="label-item">Цвет RGB</label>
             <div class="flex">
               <input
                 value="20"
@@ -350,9 +350,15 @@
     </div>
     <!-- ========================================== -->
 
-    <div class="modal-window left-64 top-5 content-center">
-      <div>
-        <h1>Состояние</h1>
+    <!-- ========== ОКНО ДЛЯ ИЗМЕНЕНИЯ ЭЛЕМЕНТОВ ============== -->
+    <div id="window-state" class="left-64 top-5 content-center hidden">
+      <div class="flex">
+        <div class="flex-1">
+          <h1>Состояние</h1>
+        </div>
+        <div>
+          <button id="btn-close-window-state" class="cursor-pointer">&larr;</button>
+        </div>
       </div>
       <div id="list-state" class="flex flex-col gap-2 mt-2">
         <div>
@@ -364,8 +370,48 @@
           <label for="coordinate-y" class="label-item">Координата Y</label>
           <input type="number" id="coordinate-y" class="input-item" />
         </div>
+
+        <div>
+          <label for="coordinate-z" class="label-item">Координата Z</label>
+          <input type="number" id="coordinate-z" class="input-item" />
+        </div>
+
+        <div>
+          <label for="sphere-color" class="label-item w-fit">Цвет RGB</label>
+          <div class="flex">
+            <input
+              value="20"
+              type="number"
+              id="item-color-red"
+              class="input-item w-fit"
+            />
+            <input
+              value="20"
+              type="number"
+              id="item-color-green"
+              class="input-item w-fit"
+            />
+            <input
+              value="208"
+              type="number"
+              id="item-color-blue"
+              class="input-item w-fit"
+            />
+          </div>
+        </div>
+
+        <div>
+          <button id="btn-delete-elem" class="bg-red-600 p-2 rounded-md text-white">Удалить</button>
+        </div>
       </div>
     </div>
+    <!-- ====================================================== -->
+
+    <!-- ========== КНОПКА СОХРАНИТЬ ============== -->
+    <!-- <div class="absolute bottom-5 right-5">
+      <button id="btn-save-app" class="p-2 hover:bg-blue-500 bg-blue-700 text-white rounded-md">Сохранить</button>
+    </div> -->
+    <!-- ========================================== -->
 
     <!-- ================= ООП ========================== -->
     <script src="./js/objects/GeometricObjects.js"></script>
@@ -377,8 +423,11 @@
     <!-- ================================================= -->
 
     <!-- =========== НАСТРОЙКИ ПРИЛОЖЕНИЯ ============================ -->
-    <script src="./js/settings/settings-app.js"></script>
-    <script src="./js/settings/rotate-block.js"></script>
+    <script src="./js/app/settings-app.js"></script>
+    <script src="./js/app/rotate-block.js"></script>
+    <script src="./js/app/translate-type-obj.js"></script>
+    <script src="./js/app/window-state.js"></script>
+    <!-- <script src="./js/app/btn-save.js"></script> -->
     <!-- ============================================================= -->
 
     <!-- ================= ГЕОМЕТРИЧЕСКИЕ ОБЪЕКТЫ JS ========================== -->
@@ -399,7 +448,10 @@
 
     <!-- =========== ГЛАВНЫЙ CANVAS ============================ -->
     <script src="./js/mainCanvasSketch.js"></script>
+    <!-- ======================================================= -->
 
-    <script src="./js/geometric-elems/list-elems.js"></script>
+    <!-- =========== УПРАВЛЕНИЕ ЭЛЕМЕНТАМИ ============================ -->
+    <script src="./js/geometric-elems/actions-for-elems.js"></script>
+    <!-- ============================================================== -->
   </body>
 </html>

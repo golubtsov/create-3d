@@ -8,11 +8,6 @@ class SphereClass extends GeometricObjects {
     this.setTypeObj("sphere");
   }
 
-  setPosition(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-
   show(sketch) {
     sketch.push();
     sketch.translate(this.x, this.y, this.radius);
